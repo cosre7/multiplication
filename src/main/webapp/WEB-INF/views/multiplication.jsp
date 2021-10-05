@@ -68,22 +68,29 @@
 		// 배열을 json 형태의 문자열로 만든다.
 		var jsonData = JSON.stringify(removeNull);
 		
-		$('#resultDiv').html(jsonData);
-		
-		/*리턴 가정*/
-
-		var returnValue = '[{"product1":6},{"product8":20},{"product4":48}]';
-		var value = JSON.parse(returnValue);
-		
-		value.forEach(function(data, idx) {
-			for (var key in data) {
-				for (var i = 1; i <= 10; i++) {
-					if (('product' + i) == key) {
-						$('#product'+i).attr('value',data[key]);
-					} 
-				}
+		$.ajax({
+			url: "/",
+			contentType: "application/json",
+			data: jsonData,
+			method: "POST",
+			success : function(returnValue) {
+				printProducts(returnValue);
 			}
-		})
+		});
+		
+		function printProducts(returnValue) {
+			var value = JSON.parse(returnValue);
+			
+			value.forEach(function(data, idx) {
+				for (var key in data) {
+					for (var i = 1; i <= 10; i++) {
+						if (('product' + i) == key) {
+							$('#product'+i).attr('value',data[key]);
+						} 
+					}
+				}
+			})
+		}
 		
 	});
 	
