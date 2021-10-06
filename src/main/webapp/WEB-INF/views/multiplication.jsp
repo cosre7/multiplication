@@ -34,7 +34,7 @@
 	    
    	$("#formDiv").append("<button type='button'>계산하기</button>");
 	
-	/* resultDiv 구성 */
+	/* 결과 구성 */
 	$('button').on('click', function() {
 
 		// 배열 선언
