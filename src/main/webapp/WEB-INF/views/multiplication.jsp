@@ -22,7 +22,7 @@
 	   	var secondFactorTag = document.createElement('input');
 	   	secondFactorTag.setAttribute('id', 'secondFactor'+i);
 	   	secondFactorTag.setAttribute('placeholder', '숫자2');
-	   	secondFactorTag.setAttribute('onKeyup', "this.value=this.value.replace(/[^0-9]/g,'');");
+	   	secondFactorTag.setAttribute('onKeyup', "this.value=this.value.replace(/\-[^0-9]/g,'');");
 	   	
 	   	var productTag = document.createElement('input');
 	   	productTag.setAttribute('id', 'product'+i);
