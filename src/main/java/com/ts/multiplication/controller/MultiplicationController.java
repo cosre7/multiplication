@@ -1,6 +1,5 @@
 package com.ts.multiplication.controller;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -33,14 +32,18 @@ public class MultiplicationController {
 	public String getProduct(@RequestBody String inputValue) {
 		JSONArray jsonArray = new JSONArray(inputValue);
 		List<Map<String, Object>> productList = new ArrayList<Map<String, Object>>();
-		
-		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject jsonObject = jsonArray.getJSONObject(i);
+	
+		try {
 			
-			BigInteger firstFactor = new BigInteger(jsonObject.get("firstFactor").toString());
-			BigInteger secondFactor = new BigInteger(jsonObject.get("secondFactor").toString());
+			for (int i = 0; i < jsonArray.length(); i++) {
+				JSONObject jsonObject = jsonArray.getJSONObject(i);
+				
+				productList.add(multiplicationService.createProductMap(jsonObject.getInt("firstFactor"), jsonObject.getInt("secondFactor"), jsonObject.getString("product")));
+			}
 			
-			productList.add(multiplicationService.createProductMap(firstFactor, secondFactor, jsonObject.getString("product")));
+		} catch(NumberFormatException e) {
+			e.printStackTrace();
+			
 		}
 		
 		Gson gson = new Gson();

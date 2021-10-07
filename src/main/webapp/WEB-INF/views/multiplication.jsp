@@ -78,6 +78,9 @@
 			method: "POST",
 			success: function(returnValue) {
 				printProducts(returnValue);
+			},
+			error: function(error) {
+				alert("계산 가능한 범위를 넘었습니다.");
 			}
 		});
 	});
