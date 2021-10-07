@@ -1,6 +1,5 @@
 package com.ts.multiplication.service;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,14 +40,17 @@ public class MultiplicationServiceTest {
 
 		JSONArray jsonArray = new JSONArray(jString);
 		List<Map<String, Object>> productList = new ArrayList<Map<String, Object>>();
-		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject jsonObject = jsonArray.getJSONObject(i);
-			
-			BigInteger firstFactor = new BigInteger(jsonObject.get("firstFactor").toString());
-			BigInteger secondFactor = new BigInteger(jsonObject.get("secondFactor").toString());
-			
+		try {
+			for (int i = 0; i < jsonArray.length(); i++) {
+				JSONObject jsonObject = jsonArray.getJSONObject(i);
+				
 //			System.out.println(jsonObject.get("product"));
-			productList.add(testcreateProductMap(firstFactor, secondFactor, (String) jsonObject.get("product")));
+				productList.add(testcreateProductMap(jsonObject.getInt("firstFactor"), jsonObject.getInt("secondFactor"), (String) jsonObject.get("product")));
+			}
+			
+		} catch(NumberFormatException e) {
+			e.printStackTrace();
+			
 		}
 		/* 여기까지 컨트롤러 부분 */
 //		System.out.println(productList);
@@ -59,15 +61,15 @@ public class MultiplicationServiceTest {
 	}
 	
 	/* 여기부터 service 부분 */
-	private Map<String, Object> testcreateProductMap(BigInteger firstFactor, BigInteger secondFactor, String product) {
+	private Map<String, Object> testcreateProductMap(int firstFactor, int secondFactor, String product) {
 		Map<String, Object> productMap = new HashMap<String, Object>();
 		productMap.put(product, testCreateProduct(firstFactor, secondFactor));
 		
 		return productMap;
 	}
 	
-	private BigInteger testCreateProduct(BigInteger firstFactor, BigInteger secondFactor) {
-		BigInteger product = firstFactor.multiply(secondFactor);
+	private int testCreateProduct(int firstFactor, int secondFactor) {
+		int product = firstFactor * secondFactor;
 		return product;
 	}
 }
