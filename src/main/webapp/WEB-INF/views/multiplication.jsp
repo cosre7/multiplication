@@ -17,12 +17,12 @@
 		var firstFactorTag = document.createElement('input');
 		firstFactorTag.setAttribute('id', 'firstFactor'+i);
 		firstFactorTag.setAttribute('placeholder', '숫자1');
-		firstFactorTag.setAttribute('onKeyup', "this.value=this.value.replace(/[^0-9]/g,'');");
+		firstFactorTag.setAttribute('onKeyup', "this.value=this.value.match(/^(-?)[0-9]*/g);");
 		
 	   	var secondFactorTag = document.createElement('input');
 	   	secondFactorTag.setAttribute('id', 'secondFactor'+i);
 	   	secondFactorTag.setAttribute('placeholder', '숫자2');
-	   	secondFactorTag.setAttribute('onKeyup', "this.value=this.value.replace(/\-[^0-9]/g,'');");
+	   	secondFactorTag.setAttribute('onKeyup', "this.value=this.value.match(/^(-?)[0-9]*/g);");
 	   	
 	   	var productTag = document.createElement('input');
 	   	productTag.setAttribute('id', 'product'+i);
