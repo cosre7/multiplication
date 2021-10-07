@@ -1,5 +1,6 @@
 package com.ts.multiplication.controller;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -37,8 +38,8 @@ public class MultiplicationControllerTest {
 					    +			"\"product\": \"product3\""
 					    +       "},"
 					    +       "{"
-					    +           "\"firstFactor\": 5,"
-					    +           "\"secondFactor\": 6,"
+					    +           "\"firstFactor\": -99999999999999999999999999999999,"
+					    +           "\"secondFactor\": 999999999999999999999999999999,"
 					    +			"\"product\": \"product4\""	
 					    +       "}"
 					    +   "]";	
@@ -48,8 +49,11 @@ public class MultiplicationControllerTest {
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 			
+			BigInteger firstFactor = new BigInteger(jsonObject.get("firstFactor").toString());
+			BigInteger secondFactor = new BigInteger(jsonObject.get("secondFactor").toString());
+			
 //			System.out.println(jsonObject.get("product"));
-			productList.add(multiplicationService.createProductMap((Integer) jsonObject.get("firstFactor"), (Integer) jsonObject.get("secondFactor"), (String) jsonObject.get("product")));
+			productList.add(multiplicationService.createProductMap(firstFactor, secondFactor, (String) jsonObject.get("product")));
 		}
 		/* 여기까지 컨트롤러 부분 */
 //		System.out.println(productList);
