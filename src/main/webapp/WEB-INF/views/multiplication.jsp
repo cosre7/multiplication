@@ -75,13 +75,13 @@
 			url: "/",
 			contentType: "application/json",
 			data: jsonData,
-			method: "POST",
-			success: function(returnValue) {
-				printProducts(returnValue);
-			},
-			error: function(error) {
-				alert("계산 가능한 범위를 넘었습니다.");
-			}
+			method: "POST"
+			
+		}).done(function(returnValue) {
+			printProducts(returnValue);
+		
+		}).fail(function(error) {
+			alert("계산 가능한 범위를 넘었습니다.");
 		});
 	});
 	
