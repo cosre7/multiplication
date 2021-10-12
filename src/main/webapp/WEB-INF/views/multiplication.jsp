@@ -48,6 +48,8 @@
 			dataObj.firstFactor = $('#firstFactor' + i).val();
 			dataObj.secondFactor = $('#secondFactor' + i).val();
 			dataObj.product = 'product' + i;
+			console.log(dataObj);	
+			//{firstFactor: '1', secondFactor: '2', product: 'product1'}
 			
 			// 둘 중 하나만 입력했을 때 "두 수 모두 입력하세요" 출력
 			if (dataObj.firstFactor != '' && dataObj.secondFactor == '' ||
@@ -70,17 +72,21 @@
 		
 		// 배열을 json 형태의 문자열로 만든다.
 		var jsonData = JSON.stringify(removeNullDataArr);
+		console.log(jsonData);
+		// [{"firstFactor":"1","secondFactor":"2","product":"product1"}]
 		
+		// 클라이언트에서 Content-type을 application/json으로 세팅해서 송신, 서버에서 @RequestBody로 받으면
+		// Json 데이터를 송수신할 수 있다.
 		$.ajax({
 			url: "/",
 			contentType: "application/json",
 			data: jsonData,
 			method: "POST"
 			
-		}).done(function(returnValue) {
+		}).done(function(returnValue) { // 호출 성공하면 product 출력
 			printProducts(returnValue);
 		
-		}).fail(function(error) {
+		}).fail(function(error) { // 에러 발생시(int 범위 초과) 
 			alert("계산 가능한 범위를 넘었습니다.");
 		});
 	});
@@ -88,11 +94,13 @@
 	function printProducts(returnValue) {
 		var value = JSON.parse(returnValue);
 		
-		value.forEach(function(data, idx) {
-			for (var key in data) {
+		value.forEach(function(item) { 
+			for (var key in item) { // value의 key를 모두 열거.
 				for (var i = 1; i <= 10; i++) {
-					if (('product' + i) == key) {
-						$('#product'+i).attr('value',data[key]);
+					if (('product' + i) == key) { // key와 product1~10이 같으면 
+						$('#product'+i).attr('value',item[key]); 
+						// id=product1~10 에 value=item[key] 를 추가한다.
+						console.log(item, key); // {product1: 2} 'product1'
 					} 
 				}
 			}
