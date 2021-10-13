@@ -78,7 +78,7 @@
 		// 클라이언트에서 Content-type을 application/json으로 세팅해서 송신, 서버에서 @RequestBody로 받으면
 		// Json 데이터를 송수신할 수 있다.
 		$.ajax({
-			url: "/",
+			url: "/getProduct.do",
 			contentType: "application/json",
 			data: jsonData,
 			method: "POST"
@@ -96,13 +96,9 @@
 		
 		value.forEach(function(item) { 
 			for (var key in item) { // value의 key를 모두 열거.
-				for (var i = 1; i <= 10; i++) {
-					if (('product' + i) == key) { // key와 product1~10이 같으면 
-						$('#product'+i).attr('value',item[key]); 
-						// id=product1~10 에 value=item[key] 를 추가한다.
-						console.log(item, key); // {product1: 2} 'product1'
-					} 
-				}
+				$('#' + key).attr('value',item[key]); 
+				// id=product1~10 에 value=item[key] 를 추가한다.
+				console.log(item, key); // {product1: 2} 'product1'
 			}
 		})
 	}

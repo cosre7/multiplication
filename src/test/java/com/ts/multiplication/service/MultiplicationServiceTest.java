@@ -31,27 +31,38 @@ public class MultiplicationServiceTest {
 					    +			"\"product\": \"product3\""
 					    +       "},"
 					    +       "{"
-					    +           "\"firstFactor\": 214748364799,"
-					    +           "\"secondFactor\": 214748364799,"
+					    +           "\"firstFactor\": 21474836479449,"
+					    +           "\"secondFactor\": 33333333333ㅇ33333333333,"
 					    +			"\"product\": \"product4\""	
+					    +       "},"
+					    +       "{"
+					    +           "\"firstFactor\": 214,"
+					    +           "\"secondFactor\": 21499,"
+					    +			"\"product\": \"product7\""	
+					    +       "},"
+					    +       "{"
+					    +           "\"firstFactor\": 219,"
+					    +           "\"secondFactor\": 2,"
+					    +			"\"product\": \"product9\""	
 					    +       "}"
 					    +   "]";	
 		
 
 		JSONArray jsonArray = new JSONArray(jString);
 		List<Map<String, Object>> productList = new ArrayList<Map<String, Object>>();
-		try {
-			for (int i = 0; i < jsonArray.length(); i++) {
-				JSONObject jsonObject = jsonArray.getJSONObject(i);
+		for (int i = 0; i < jsonArray.length(); i++) {
+			try {
+			JSONObject jsonObject = jsonArray.getJSONObject(i);
+			
+//		System.out.println(jsonObject.get("product"));
+			productList.add(testcreateProductMap(jsonObject.getInt("firstFactor"), jsonObject.getInt("secondFactor"), (String) jsonObject.get("product")));
+			} catch(Exception e) {
+				System.out.println("초과");
 				
-//			System.out.println(jsonObject.get("product"));
-				productList.add(testcreateProductMap(jsonObject.getInt("firstFactor"), jsonObject.getInt("secondFactor"), (String) jsonObject.get("product")));
 			}
-			
-		} catch(NumberFormatException e) {
-			e.printStackTrace();
-			
 		}
+			
+			
 		/* 여기까지 컨트롤러 부분 */
 //		System.out.println(productList);
 		

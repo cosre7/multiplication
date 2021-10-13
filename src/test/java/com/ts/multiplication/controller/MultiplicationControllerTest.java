@@ -45,18 +45,18 @@ public class MultiplicationControllerTest {
 		
 		JSONArray jsonArray = new JSONArray(jString);
 		List<Map<String, Object>> productList = new ArrayList<Map<String, Object>>();
-		try {
 			for (int i = 0; i < jsonArray.length(); i++) {
+				try {
 				JSONObject jsonObject = jsonArray.getJSONObject(i);
 				
 //			System.out.println(jsonObject.get("product"));
 				productList.add(multiplicationService.createProductMap(jsonObject.getInt("firstFactor"), jsonObject.getInt("secondFactor"), (String) jsonObject.get("product")));
+				} catch(Exception e) {
+					System.out.println("초과");
+					
+				}
 			}
 			
-		} catch(NumberFormatException e) {
-			e.printStackTrace();
-			
-		}
 		/* 여기까지 컨트롤러 부분 */
 //		System.out.println(productList);
 		

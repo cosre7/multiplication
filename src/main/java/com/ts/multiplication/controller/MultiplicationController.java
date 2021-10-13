@@ -22,13 +22,13 @@ public class MultiplicationController {
 	@Autowired
 	MultiplicationService multiplicationService;
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home() {
 		return "multiplication";
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/", method = RequestMethod.POST)
+	@RequestMapping(value = "/getProduct.do", method = RequestMethod.POST)
 	public String getProduct(@RequestBody String inputValue) {
 		// @RequestBody : 클라이언트가 전송하는 Json 형태의 HTTP Body 내용을 Java Object로 변환시켜주는 역할
 		// 				  - body에 있는 데이터를 가져온다.
@@ -38,21 +38,21 @@ public class MultiplicationController {
 		JSONArray jsonArray = new JSONArray(inputValue);
 		List<Map<String, Object>> productList = new ArrayList<Map<String, Object>>();
 	
-		try {
 			
 			for (int i = 0; i < jsonArray.length(); i++) {
+				try {
 				JSONObject jsonObject = jsonArray.getJSONObject(i);
 //				System.out.println(jsonObject); 
 				/*{"product":"product1","firstFactor":"2","secondFactor":"5"}
 				{"product":"product7","firstFactor":"6","secondFactor":"8"}*/
 				productList.add(multiplicationService.createProductMap(jsonObject.getInt("firstFactor"), jsonObject.getInt("secondFactor"), jsonObject.getString("product")));
+				} catch(NumberFormatException e) { 
+					// 입력값이 int 범위를 넘는 경우 발생하는 NumberFormatException 에러 제어 
+					System.out.println("초과");
+					continue;
+				}
 			}
 			
-		} catch(NumberFormatException e) { 
-			// 입력값이 int 범위를 넘는 경우 발생하는 NumberFormatException 에러 제어 
-			e.printStackTrace();
-			
-		}
 		
 		Gson gson = new Gson();
 		String gsonString = gson.toJson(productList);
