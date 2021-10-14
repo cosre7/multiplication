@@ -79,15 +79,13 @@
 		// Json 데이터를 송수신할 수 있다.
 		$.ajax({
 			url: "/getProduct.do",
-			contentType: "application/json",
+			contentType: "application/json; charset=UTF-8",
 			data: jsonData,
 			method: "POST"
 			
 		}).done(function(returnValue) { // 호출 성공하면 product 출력
 			printProducts(returnValue);
 		
-		}).fail(function(error) { // 에러 발생시(int 범위 초과) 
-			alert("계산 가능한 범위를 넘었습니다.");
 		});
 	});
 	
