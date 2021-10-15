@@ -36,10 +36,17 @@
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
+			<artifactId>aspectjweaver</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency>	
 		
+		<!-- cglib -->
+		<dependency>
+		    <groupId>cglib</groupId>
+		    <artifactId>cglib</artifactId>
+		    <version>2.2</version>
+		</dependency>
+
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -137,14 +144,6 @@
 		    <artifactId>json</artifactId>
 		    <version>20210307</version>
 		</dependency>
-
-		<!-- @configuration 애노테이션을 사용하기 위한 cglib -->
-		<!-- <dependency> 
-			<groupId>cglib</groupId> 
-			<artifactId>cglib</artifactId> 
-			<version>2.2.2</version> 
-			<scope>runtime</scope> 
-		</dependency> -->
 	</dependencies>
 	
     <build>
@@ -183,16 +182,6 @@
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
             </plugin>
-            <!-- web.xml 파일 없이 사용하기 위한 플러그인 -->
-            <!-- <plugin>
-            	<groupId>org.apache.maven.plugins</groupId>
-            	<artifactId>maven-war-plugin</artifactId>
-            	<version>3.2.0</version>
-            	<configuration>
-            		<failOnMissingWebXml>false</failOnMissingWebXml>
-            	</configuration>
-            </plugin>
-             -->
         </plugins>
     </build>
 </project>

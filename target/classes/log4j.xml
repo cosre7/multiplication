@@ -11,12 +11,13 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.ts.multiplication">
+	<logger name="com.ts.multiplication" additivity="false">
 		<level value="info" />
+		<appender-ref ref="console" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
-	<logger name="org.springframework.core">
+	<!-- <logger name="org.springframework.core">
 		<level value="info" />
 	</logger>
 	
@@ -30,11 +31,11 @@
 
 	<logger name="org.springframework.web">
 		<level value="info" />
-	</logger>
+	</logger> -->
 
 	<!-- Root Logger -->
 	<root>
-		<priority value="warn" />
+		<priority value="off" />
 		<appender-ref ref="console" />
 	</root>
 	

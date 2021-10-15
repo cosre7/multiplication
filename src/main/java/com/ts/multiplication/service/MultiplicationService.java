@@ -14,8 +14,6 @@ import com.google.gson.Gson;
 @Service
 public class MultiplicationService {
 
-	private MultiplicationService() {}
-	
 	public String generateProductResult(String inputValue) {
 		List<Map<String, Object>> product = createProductList(inputValue);
 		Gson gson = new Gson();
@@ -31,7 +29,6 @@ public class MultiplicationService {
 			
 			try {
 				productList.add(createProductMap(jsonObject.getInt("firstFactor"), jsonObject.getInt("secondFactor"), jsonObject.getString("product")));
-				
 			} catch(Exception e) {
 				productList.add(exceptionProductMap(jsonObject.getString("product")));
 			}
