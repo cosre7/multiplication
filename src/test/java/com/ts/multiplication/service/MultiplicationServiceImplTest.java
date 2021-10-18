@@ -12,7 +12,7 @@ import org.junit.Test;
 import com.google.gson.Gson;
 
 
-public class MultiplicationServiceTest {
+public class MultiplicationServiceImplTest {
 	
 	@Test
 	public void testService() {

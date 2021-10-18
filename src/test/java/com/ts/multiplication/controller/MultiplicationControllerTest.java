@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.ts.multiplication.service.MultiplicationService;
+import com.ts.multiplication.service.MultiplicationServiceImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:servlet-context.xml")
 public class MultiplicationControllerTest {
 	
 	@Autowired
-	MultiplicationService multiplicationService;
+	MultiplicationServiceImpl multiplicationService;
 	
 	@Test
 	public void testGetProduct() {
