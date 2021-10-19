@@ -12,7 +12,7 @@
 	
 	<!-- Application Loggers -->
 	<logger name="com.ts.multiplication" >
-		<level value="error" />
+		<level value="info" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
